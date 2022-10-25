@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <link rel="stylesheet" href="style.css" />
+  <body>
+    <div class="container">
+      <h1>Let's Play</h1>
+
+      <div class="dice">
+        <p class="Player1">Player 1</p>
+        <img class="img1" src="dice6.png" />
+        <p id="scr1">score1</p>
+      </div>
+
+      <div class="dice">
+        <p class="Player2">Player 2</p>
+        <img class="img2" src="dice6.png" />
+        <p id="scr2">score2</p>
+      </div>
+      <p id="result">let's start</p>
+
+    </div>
+    <div class="container bottom">
+      <button id="myBtn" type="button" class="butn" onClick="rollTheDice()">
+        Roll the Dice
+      </button>
+    </div>
+    <div class="container bottom">
+      <button type="button" class="butn" onClick="resetTheDice()">Reset</button>
+    </div>
+    <script>
+
+      var player1 = "Player 1";
+      var player2 = "Player 2";
+      var score1 = 0;
+      var score2 = 0;
+      function rollTheDice() {
+          var randomNumber1 = Math.floor(Math.random() * 6) + 1;
+          var randomNumber2 = Math.floor(Math.random() * 6) + 1;
+          document
+            .querySelector(".img1")
+            .setAttribute("src", "dice" + randomNumber1 + ".png");
+
+          document
+            .querySelector(".img2")
+            .setAttribute("src", "dice" + randomNumber2 + ".png");
+
+          score1 = score1 + randomNumber1;
+          document.getElementById("scr1").innerHTML = score1;
+          score2 = score2 + randomNumber2;
+          document.getElementById("scr2").innerHTML = score2;
+          if (score1 >= 25 || score2 >= 25){
+            document.getElementById("myBtn").disabled = true;
+          }
+
+          if (score1 === score2) {
+            document.getElementById("result").innerHTML = "Draw!";
+          } else if (score1 < score2) {
+            document.getElementById("result").innerHTML = player2 + " WINS!";
+          } else {
+            document.getElementById("result").innerHTML = player1 + " WINS!";
+          }
+        }
+
+    
+
+      function resetTheDice() {
+        document.getElementById("myBtn").disabled = false;
+
+        document
+          .querySelector(".img1")
+          .setAttribute("src", "dice" + 1 + ".png");
+        document
+          .querySelector(".img2")
+          .setAttribute("src", "dice" + 1 + ".png");
+        document.getElementById("result").innerHTML= "let's start";
+        document.getElementById("scr1").innerHTML= "score1";  
+        document.getElementById("scr2").innerHTML= "score2";  
+          score1 = 0;
+          score2 = 0;
+
+      }
+
+
+      
+    </script>
+  </body>
+</html>
